@@ -13,7 +13,7 @@
 <body>
 <form action="">
     <div class="input_field">
-        <input type="text" placeholder="网站账号" name="email" value="1046048974@qq.com"/>
+        <input type="text" placeholder="网站账号" name="email" value=""/>
         <div class="prompt">
             <div class="prompt_pub"><p>请输入您的网站账号（通常为邮箱地址）</p>
                 <p>查询您的隐私信息是否已经泄露</p></div>
@@ -21,7 +21,7 @@
                 <p>再查一个试试看</p></div>
         </div>
     </div>
-    <button id="subBtn">提交</button>
+    <button id="subBtn" type="button">提交</button>
 </form>
 <div class="dialog_box">
     <div class="dialog">
@@ -29,8 +29,27 @@
         <div class="text_center text"></div>
     </div>
 </div>
+<!--微信提示-->
+<div class="wx_prompt_box" id="wxPrompt">
+	<div class="wx_prompt dis_fx fx_center fx_clumn"><span class="icon"></span><span>微信用户请使用外部浏览器打开</span></div>
+</div>
 <script>
   $(function () {
+  	//判断是否是微信浏览器的函数
+	function isWeiXin(){
+	  //window.navigator.userAgent属性包含了浏览器类型、版本、操作系统类型、浏览器引擎类型等信息，这个属性可以用来判断浏览器类型
+	  var ua = window.navigator.userAgent.toLowerCase();
+	  //通过正则表达式匹配ua中是否含有MicroMessenger字符串
+	  if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+	  return true;
+	  }else{
+	  return false;
+	  }
+	}
+  if(isWeiXin()){
+	  	$('#wxPrompt').show();
+	}
+	//提交
     $('#subBtn').click(function () {
       var emailVal = $('[name="email"]').val()
       var emailT = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
@@ -39,9 +58,8 @@
       } else if (!emailT.test(emailVal)) {
         mobileDialog('error', '请输入正确的邮箱地址')
       } else {
-        window.location.href = 'result.html?email=' + emailVal
+        window.location.href = '/result.html?email=' + emailVal
       }
-      return false
     })
   })
 

@@ -1,4 +1,4 @@
-.dialog_box{
+.dialog_box,.wx_prompt_box{
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -30,6 +30,29 @@
 	height: 0.7rem;
 	background: url(../icons/error.png) no-repeat center/cover;
 	margin-bottom: 0.3rem;
+}
+.wx_prompt_box{
+	background: rgba(0,0,0,0.5);
+}
+.wx_prompt_box .wx_prompt{
+	width: 80%;
+	height: 2rem;
+	background: #fff;
+	color: #333;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	border-radius: 0.1rem;	
+	font-size: 0.38rem;
+}
+.wx_prompt .icon{
+	width: 0.5rem;
+	height: 0.5rem;
+	background: url(../icons/prompt2.png) no-repeat center/cover;
+	margin-right: 0.1rem;
 }
 body{
 	font-size: 0.35rem;
