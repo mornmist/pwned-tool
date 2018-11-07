@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>晨雾科技</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="css/phone_rem.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/height.js"></script>
+    <script src="js/common.js "></script>
+</head>
+<body>
+<div class="result_box">
+    <h3>您在如下网站的信息已遭黑客窃取：</h3>
+    <!--<ul>-->
+    <!--<li>1.GFAN</li>-->
+    <!--<li>名称：GFAN</li>-->
+    <!--<li>域名：gfan.com</li>-->
+    <!--<li>泄露信息：-->
+    <!--<p>Emain addresses</p>-->
+    <!--<p>IP addresses</p>-->
+    <!--<p>Passwords</p>-->
+    <!--<p>Usernames</p>-->
+    <!--</li>-->
+    <!--<li>泄露日期：2016-10-10</li>-->
+    <!--</ul>-->
+</div>
+<div class="dialog_box">
+    <div class="dialog">
+        <span class="icon"></span>
+        <div class="text_center text"></div>
+    </div>
+</div>
+<script>
+  function getQueryString (name) {
+    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+    var r = window.location.search.substr(1).match(reg)
+    if (r != null) return unescape(r[2])
+    return null
+  }
+
+  var email = getQueryString('email')
+  // email = 'test@example.com'  // 测试邮箱
+  $.ajax({
+    url: 'https://haveibeenpwned.com/api/v2/breachedaccount/' + email,
+    success: function (res) {
+      if (res && res.length > 0) {
+        var resData = res
+        var reHtml = []
+        for (var i = 0; i < resData.length; i++) {
+          var item = resData[i]
+          var dataClassStr = ''
+          if (item.DataClasses && item.DataClasses.length > 0) {
+            for (var q = 0; q < item.DataClasses.length; q++) {
+              dataClassStr = dataClassStr + '<p>' + item.DataClasses[q] + '</p>'
+            }
+          }
+          reHtml.push(`<ul>
+                        <li>${i+1}.${item.Name}</li>
+                        <li>名称：${item.Name}</li>
+                        <li>域名：${item.Domain}</li>
+                        <li>泄露信息：
+                            ${dataClassStr}
+                        </li>
+                        <li>泄露日期：${item.BreachDate}</li>
+                    </ul>`)
+        }
+        $('.result_box').append(reHtml.join(''))
+      }
+      if (res.length === 0) {
+        mobileDialog('success', '恭喜你,在现有的黑产数据库中没有发现您的信息！')
+      }
+    },
+    error: function () {
+      mobileDialog('success', '恭喜你,在现有的黑产数据库中没有发现您的信息！')
+    }
+  })
+</script>
+
+</body>
+</html>

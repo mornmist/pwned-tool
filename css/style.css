@@ -1,0 +1,78 @@
+.dialog_box{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 3;
+	display: none;
+}
+.dialog_box .dialog{
+	width: 3.3rem;
+	height: 3.3rem;
+	background: rgba(0,0,0,0.5);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	border-radius: 0.2rem;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 0 0.25rem;
+}
+.dialog .icon{
+	width: 0.7rem;
+	height: 0.7rem;
+	background: url(../icons/error.png) no-repeat center/cover;
+	margin-bottom: 0.3rem;
+}
+body{
+	font-size: 0.35rem;
+	padding: 0.3rem;
+}
+form input{
+	font-size: 0.35rem;
+	border: 1px solid #A7A7A7;
+	height: 1rem;
+	border-radius: 0.1rem;
+	padding: 0 0.2rem;
+	color: #333;
+	margin-top: 0.5rem;
+}
+form .prompt{
+	color: #7D7D7D;
+	font-size: 0.35rem;
+	margin:0.2rem 0 0.6rem
+}
+.prompt .prompt_suc{
+	display: none;
+	color: #387AC9;
+}
+form button{
+	width: 100%;
+	height: 1.2rem;
+	background: #387AC9;
+	color: #fff;
+	font-size: 0.45rem;
+	border: 0 none;
+	border-radius: 0.1rem;
+}
+.result_box ul{
+	padding: 0.2rem 0;
+	color: #555;
+	border-bottom: 1px solid #ddd;
+}
+.result_box ul:last-child{
+	border-bottom: 0 none;
+}
+.result_box ul li,.result_box ul li p{
+	line-height: 0.6rem;
+}
+.result_box ul li p{
+	margin-left: 1em;
+}
